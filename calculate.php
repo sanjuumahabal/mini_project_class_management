@@ -82,15 +82,21 @@
             margin-top: 20px;
             text-align: center;
             font-weight: bold;
+            font-size: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
         }
 
         .redirect-link {
-            display: block;
-            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
             margin-bottom: 20px;
-            color: #007bff;
-            text-decoration: underline;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
         .redirect-link:hover {
@@ -103,7 +109,7 @@
     <div class="container">
         <div class="dashboard">
             <h1>View Slots</h1>
-            <a href="teacher_management.php" class="redirect-link">Go to Teacher Management</a>
+            <a href="teacher_management.php"><button class="redirect-link">Go to Teacher Management</button></a>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="get" class="filter-form">
                 <label for="teacher_id">Select Teacher ID:</label>
                 <select name="teacher_id" id="teacher_id">
@@ -152,7 +158,8 @@
                         $totalSalary = $payPerHour * $totalDuration;
 
                         // Display the result
-                        echo "<div class='result'>Total Salary for Teacher ID $teacherId: $totalSalary</div>";
+                        echo "<div class='result'>Total Salary for Teacher ID $teacherId: Rs. $totalSalary</div>";
+                        echo "<br>";
                     } else {
                         echo "<div class='result'>Error: Pay per hour not found for Teacher ID $teacherId</div>";
                     }
@@ -164,8 +171,9 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Slot ID</th>
+                        <!-- <th>Slot ID</th> -->
                         <th>Teacher ID</th>
+                        <th>Teacher Name</th>
                         <th>Slot Date</th>
                         <th>From Time</th>
                         <th>To Time</th>
@@ -181,7 +189,8 @@
                     }
 
                     // Query to fetch slots data with optional filter
-                    $query = "SELECT * FROM Slots" . $filter;
+                    $query = "SELECT s.*, t.first_name, t.middle_name, t.last_name FROM Slots s 
+                              LEFT JOIN Teachers t ON s.Teacher_ID = t.T_ID" . $filter;
 
                     $result = $conn->query($query);
 
@@ -189,8 +198,11 @@
                         // Output data of each row
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
-                            echo "<td>" . $row["Slot_ID"] . "</td>";
+                            // echo "<td>" . $row["Slot_ID"] . "</td>";
                             echo "<td>" . $row["Teacher_ID"] . "</td>";
+                            // Combine first name, middle name, and last name
+                            $fullName = $row["first_name"] . " " . $row["middle_name"] . " " . $row["last_name"];
+                            echo "<td>" . $fullName . "</td>";
                             echo "<td>" . $row["Slot_Date"] . "</td>";
                             echo "<td>" . $row["From_Time"] . "</td>";
                             echo "<td>" . $row["To_Time"] . "</td>";
@@ -198,7 +210,7 @@
                             echo "</tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='6'>No slots found</td></tr>";
+                        echo "<tr><td colspan='7'>No slots found</td></tr>";
                     }
 
                     // Close the database connection

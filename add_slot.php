@@ -90,7 +90,7 @@
             include 'db_connect.php';
 
             // Fetch teacher ID from the URL parameter
-            if(isset($_GET["teacher_id"]) && !empty(trim($_GET["teacher_id"]))){
+            if (isset($_GET["teacher_id"]) && !empty(trim($_GET["teacher_id"]))) {
                 $teacherId = trim($_GET["teacher_id"]);
             }
 
@@ -108,13 +108,16 @@
 
                 // Convert duration to hours
                 $durationHours = $durationSeconds / (60 * 60); // 1 hour = 60 minutes * 60 seconds
-
+            
                 // Insert the data into the Slots table
                 $query = "INSERT INTO Slots (Teacher_ID, Slot_Date, From_Time, To_Time, Duration_Hours) 
                           VALUES ('$teacherId', '$slotDate', '$fromTime', '$toTime', '$durationHours')";
 
                 if ($conn->query($query) === TRUE) {
-                    echo "<p>New slot added successfully</p>";
+                    echo "<script>
+                        alert('New Slot Added Successfully');
+                        window.location.href = 'teacher_management.php';
+                        </script>";
                 } else {
                     echo "Error: " . $query . "<br>" . $conn->error;
                 }

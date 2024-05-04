@@ -25,7 +25,10 @@ $sql = "INSERT INTO Teachers (first_name, middle_name, last_name, date_of_birth,
         VALUES ('$first_name', '$middle_name', '$last_name', '$date_of_birth', '$gender', '$qualification', '$year_of_experience', '$address_street', '$address_city', '$address_state', '$address_zip', '$contact_number', '$email', '$date_of_joining', '$pay_per_hour')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
+    echo "<script>
+            alert('New Teacher Added Successfully');
+            window.location.href = 'teacher_management.php';
+        </script>";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

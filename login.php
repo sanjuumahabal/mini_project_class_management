@@ -20,7 +20,10 @@ if ($result->num_rows > 0) {
     header("Location: dashboard.php");
     exit;
 } else {
-    echo "Invalid username or password";
+    echo "<script>
+            alert('Invalid Username or Password!!!');
+            window.location.href = 'login.html';
+        </script>";
 }
 
 $conn->close();

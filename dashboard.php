@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduManage - Dashboard</title>
+    <title>ClassMaster - Dashboard</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -88,7 +88,7 @@
         .logout {
             position: relative;
             top: -5px;
-            right: -795px;
+            right: -900px;
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -153,7 +153,7 @@
             <div>
                 <button class="logout" onclick="location.href='logout.php';"><i class="fa-solid fa-power-off"></i> Logout</button>
             </div>
-            <h1>Welcome to EduManage</h1>
+            <h1>Welcome to ClassMaster</h1>
             <div class="metrics">
                 <div class="metric">
                     <h2>Total Fees Collected</h2>
